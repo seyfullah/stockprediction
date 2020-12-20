@@ -1,0 +1,68 @@
+python stock_price_prediction.py
+start:2020-12-13 15:31:35.756379
+                 High        Low       Open      Close       Volume  Adj Close
+Date
+2012-01-03  14.732142  14.607142  14.621428  14.686786  302220800.0  12.566676
+2012-01-04  14.810000  14.617143  14.642858  14.765715  260022000.0  12.634213
+2012-01-05  14.948215  14.738214  14.819643  14.929643  271269600.0  12.774481
+2012-01-06  15.098214  14.972143  14.991786  15.085714  318292800.0  12.908023
+2012-01-09  15.276786  15.048214  15.196428  15.061786  394024400.0  12.887549
+...               ...        ...        ...        ...          ...        ...
+2019-12-11  67.775002  67.125000  67.202499  67.692497   78756800.0  66.567886
+2019-12-12  68.139999  66.830002  66.945000  67.864998  137310400.0  66.737518
+2019-12-13  68.824997  67.732498  67.864998  68.787498  133587600.0  67.644707
+2019-12-16  70.197502  69.245003  69.250000  69.964996  128186000.0  68.802635
+2019-12-17  70.442497  69.699997  69.892502  70.102501  114158400.0  68.937851
+
+[2003 rows x 6 columns]
+(2003, 6)
+1603
+[[0.01316509]
+ [0.01457064]
+ [0.01748985]
+ ...
+ [0.97658263]
+ [0.99755134]
+ [1.        ]]
+(1543, 60)
+(1543, 60, 1)
+2020-12-13 15:31:40.983921: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-12-13 15:31:41.008336: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2599990000 Hz
+2020-12-13 15:31:41.008866: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x56048f4c8dc0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-12-13 15:31:41.008885: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2020-12-13 15:31:41.009006: I tensorflow/core/common_runtime/process_util.cc:147] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+1543/1543 [==============================] - 49s 32ms/step - loss: 8.3898e-04
+2020-12-13 15:32:34.506625: W tensorflow/python/util/util.cc:329] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+WARNING:tensorflow:From /home/seyfullah/anaconda3/lib/python3.8/site-packages/tensorflow/python/ops/resource_variable_ops.py:1813: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2.3056222981151175
+stock_price_prediction.py:100: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  valid['Predictions'] = predictions  # Visualize the data
+                Close  Predictions
+Date
+2018-05-17  46.747501    45.815022
+2018-05-18  46.577499    45.897369
+2018-05-21  46.907501    45.920052
+2018-05-22  46.790001    45.944771
+2018-05-23  47.090000    45.954628
+...               ...          ...
+2019-12-11  67.692497    63.026756
+2019-12-12  67.864998    63.213779
+2019-12-13  68.787498    63.414536
+2019-12-16  69.964996    63.691944
+2019-12-17  70.102501    64.086441
+
+[400 rows x 2 columns]
+pred_price
+[[64.495674]]
+quote['Close']
+Date
+2019-12-18    69.934998
+Name: Close, dtype: float64
+end:  2020-12-13 15:32:41.827736
+Elapsed time: 00:01:06.07
