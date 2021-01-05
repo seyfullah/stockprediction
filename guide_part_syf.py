@@ -13,8 +13,8 @@ time = 500
 network = Network()
 
 # Create and add input, output layers.
-source_layer = Input(n=100)
-target_layer = LIFNodes(n=1000)
+source_layer = Input(n=4)
+target_layer = LIFNodes(n=5)
 
 network.add_layer(
     layer=source_layer, name="A"

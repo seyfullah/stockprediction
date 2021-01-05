@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cbb4159d-0182-41b4-b558-1768cae0a1a2" name="Default Changelist" comment="First commit">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/other.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/stockprediction.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LSTM/AAPL-60-LSTM/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LSTM/AAPL-60-LSTM/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LSTM/AAPL-60-LSTM/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LSTM/result.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LSTM/stock_price_prediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU/fundamentals.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU/prices-split-adjusted.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU/prices.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NY Stock Price Prediction RNN LSTM GRU/NY Stock Price Prediction RNN LSTM GRU/securities.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/01-tensor_tutorial.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/02-autograd_tutorial.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/04-cifar10_tutorial.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/Untitled Folder/02-Learning PyTorch with Examples.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/cifar_net.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/batches.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/data_batch_1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/data_batch_2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/data_batch_3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/data_batch_4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/data_batch_5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/readme.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-batches-py/test_batch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/data/cifar-10-python.tar.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/1-numy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/2-tensors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/3-autograd.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/4-autograd-functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/5-nn-module.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/6-nn-optim.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/7-nn-custom.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/8-nn-control-flow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/data/mnist/mnist.pkl.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PyTorch/pytorch_with_examples/nn_tutorial.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StockPriceDataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Time Series ARIMA/ARIMA Model – Complete Guide to Time Series Forecasting in Python.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Time Series ARIMA/Time Series Analysis in Python – A Comprehensive Guide with Examples.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aifortrading.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bindsnet-prediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataset.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/5.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/processed/test.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/processed/training.pt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/t10k-images-idx3-ubyte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/t10k-images-idx3-ubyte.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/t10k-labels-idx1-ubyte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/t10k-labels-idx1-ubyte.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/train-images-idx3-ubyte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/train-images-idx3-ubyte.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/train-labels-idx1-ubyte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/MNIST/raw/train-labels-idx1-ubyte.gz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/cpu_gpu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/gan-experiment.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/learndatasci.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/matplotlib-experiment.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/statebased_vs_oop_pyplot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/subplot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/experiments/times_passed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-stock-price-prediction-rnn/google-stock-price-prediction-rnn.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-stock-price-prediction-rnn/google-stock-price-prediction-rnn.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-stock-price-prediction-rnn/google-stock-price-prediction-rnn/testset.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-stock-price-prediction-rnn/google-stock-price-prediction-rnn/trainset.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pytorch-lstm-time-series.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-0/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-0/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-0/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-1/saved_model.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-1/variables/variables.data-00000-of-00001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL-60-1/variables/variables.index" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/AAPL.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/Agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/RlUtility.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/result.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/rl-stock-price-prediction-test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/rl-stock-price-prediction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rl/train-result.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stock-price-prediction-using-lstm.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/time-series-data-analysis-stock-price/S&amp;P 500 stock data.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/time-series-data-analysis-stock-price/S&amp;P 500 stock data/all_stocks_5yr.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/time-series-data-analysis-stock-price/S&amp;P 500 stock data/getSandP.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/time-series-data-analysis-stock-price/S&amp;P 500 stock data/merge.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/time-series-data-analysis-stock-price/time-series-data-analysis-stock-price.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/Pytorch-time-series.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/Time+Series+Forecasting+Videos.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/dataset.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c01_common_patterns.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c02_naive_forecasting.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c03_moving_average.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c04_time_windows.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c05_forecasting_with_machine_learning.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c06_forecasting_with_rnn.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c07_forecasting_with_stateful_rnn.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c08_forecasting_with_lstm.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c09_forecasting_with_cnn-pytorch.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/udacity lesson 8 time series/l08c09_forecasting_with_cnn.ipynb" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Seyfullah Tıkıç &lt;stikic@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1luZvgzzmu1Pz36bi9lcIi0QJyC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/PyTorch/pytorch_with_examples" />
+      <recent name="$PROJECT_DIR$/rl" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/PyTorch/pytorch_with_examples" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.bindsnet-prediction">
+    <configuration name="7-nn-custom" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PyTorch/pytorch_with_examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PyTorch/pytorch_with_examples/7-nn-custom.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="8-nn-control-flow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PyTorch/pytorch_with_examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PyTorch/pytorch_with_examples/8-nn-control-flow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="bindsnet-prediction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/bindsnet-prediction.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cpu_gpu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/experiments" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/experiments/cpu_gpu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="pytorch-lstm-time-series" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="stockprediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pytorch-lstm-time-series.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.bindsnet-prediction" />
+        <item itemvalue="Python.pytorch-lstm-time-series" />
+        <item itemvalue="Python.cpu_gpu" />
+        <item itemvalue="Python.8-nn-control-flow" />
+        <item itemvalue="Python.7-nn-custom" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cbb4159d-0182-41b4-b558-1768cae0a1a2" name="Default Changelist" comment="" />
+      <created>1608449168636</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608449168636</updated>
+      <workItem from="1608449172800" duration="7764000" />
+      <workItem from="1608472217515" duration="7763000" />
+      <workItem from="1609250537935" duration="982000" />
+      <workItem from="1609354518107" duration="799000" />
+      <workItem from="1609355743304" duration="16932000" />
+      <workItem from="1609880304046" duration="2402000" />
+    </task>
+    <task id="LOCAL-00001" summary="First commit">
+      <created>1608449214917</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1608449214917</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="First commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/stockprediction$pytorch_lstm_time_series.coverage" NAME="pytorch-lstm-time-series Coverage Results" MODIFIED="1609479056830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stockprediction$aifortrading.coverage" NAME="aifortrading Coverage Results" MODIFIED="1608467527449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stockprediction$bindsnet_prediction.coverage" NAME="bindsnet-prediction Coverage Results" MODIFIED="1609502419511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stockprediction$pytorch1.coverage" NAME="pytorch1 Coverage Results" MODIFIED="1609357330174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/stockprediction$rl_stock_price_prediction_test.coverage" NAME="rl-stock-price-prediction-test Coverage Results" MODIFIED="1608474575140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rl" />
+    <SUITE FILE_PATH="coverage/stockprediction$rl_stock_price_prediction.coverage" NAME="rl-stock-price-prediction Coverage Results" MODIFIED="1608575510511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/rl" />
+  </component>
+</project>
