@@ -24,19 +24,30 @@ prices = prices.astype('float').reshape(-1, 2)
 
 stock_dataset = StockDataset(csv_file='AAPL_data.csv')
 
-dates = []
-closes = []
-for i, stock in enumerate(stock_dataset):
-    dates.append(stock['date'])
-    closes.append(stock['close'])
+stock_dataset.plot_technical_indicators(len(stock_dataset.df))
 
-# Visualize the closing price history
-plt.figure(figsize=(16, 8))
-plt.title('Close Price History')
-plt.plot(closes)
-plt.xlabel('Date', fontsize=18)
-plt.ylabel('Close Price USD ($)', fontsize=18)
-plt.legend()
-plt.show()
+# dates = []
+# closes = []
+# for i, stock in enumerate(stock_dataset):
+#     dates.append(stock['date'])
+#     closes.append(stock['close'])
 
-answer = input("Devam?")
+# # Visualize the closing price history
+# plt.figure(figsize=(16, 8))
+# plt.title('Close Price History')
+# plt.plot(closes)
+# plt.xlabel('Date', fontsize=18)
+# plt.ylabel('Close Price USD ($)', fontsize=18)
+# plt.legend()
+# plt.show()
+
+# answer = input("Devam?")
+
+
+
+# Get training and test data
+(X_train_FI, y_train_FI), (X_test_FI, y_test_FI) = stock_dataset.get_feature_importance_data()
+
+print(len(X_test_FI))
+
+answer = input("Devam mı?")

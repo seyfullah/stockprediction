@@ -5,6 +5,7 @@ from bindsnet.network.nodes import Input, LIFNodes
 from bindsnet.network.topology import Connection
 from bindsnet.network.monitors import Monitor
 from bindsnet.analysis.plotting import plot_spikes, plot_voltages
+from StockDataset import StockDataset
 
 # Simulation time.
 time = 500
@@ -61,7 +62,17 @@ network.add_monitor(monitor=source_monitor, name="A")
 network.add_monitor(monitor=target_monitor, name="B")
 
 # Create input spike data, where each spike is distributed according to Bernoulli(0.1).
-input_data = torch.bernoulli(0.1 * torch.ones(time, source_layer.n)).byte()
+#input_data = torch.bernoulli(0.1 * torch.ones(time, source_layer.n)).byte()
+stock_dataset = StockDataset(csv_file='AAPL_data.csv')
+
+dates = []
+closes = []
+for i, stock in enumerate(stock_dataset):
+    dates.append(stock['date'])
+    closes.append(stock['close'])
+input_data = stock_dataset.df
+(X_train_FI, y_train_FI), (X_test_FI, y_test_FI) = stock_dataset.get_feature_importance_data()
+
 inputs = {"A": input_data}
 
 # Simulate network on input data.
