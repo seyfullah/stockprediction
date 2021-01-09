@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from time import time as t
 
-from bindsnet.datasets import MNIST
+from bindsnet.datasets import Cityscapes
 from bindsnet.encoding import PoissonEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
@@ -44,7 +44,7 @@ parser.add_argument("--train", dest="train", action="store_true")
 parser.add_argument("--test", dest="train", action="store_false")
 parser.add_argument("--plot", dest="plot", action="store_true")
 parser.add_argument("--gpu", dest="gpu", action="store_true")
-parser.set_defaults(plot=False, gpu=True)
+parser.set_defaults(plot=True, gpu=True)
 
 args = parser.parse_args()
 
@@ -105,11 +105,11 @@ network = DiehlAndCook2015(
 if gpu:
     network.to("cuda")
 
-# Load MNIST data.
-train_dataset = MNIST(
+# Load Cityscapes data.
+train_dataset = Cityscapes(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
+    root=os.path.join("..", "..", "data", "Cityscapes"),
     download=True,
     train=True,
     transform=transforms.Compose(
@@ -277,11 +277,11 @@ print("Progress: %d / %d (%.4f seconds)" % (epoch + 1, n_epochs, t() - start))
 print("Training complete.\n")
 
 
-# Load MNIST data.
-test_dataset = MNIST(
+# Load Cityscapes data.
+test_dataset = Cityscapes(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
+    root=os.path.join("..", "..", "data", "Cityscapes"),
     download=True,
     train=False,
     transform=transforms.Compose(

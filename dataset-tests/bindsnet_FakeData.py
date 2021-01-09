@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from time import time as t
 
-from bindsnet.datasets import MNIST
+from bindsnet.datasets import FakeData
 from bindsnet.encoding import PoissonEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
@@ -91,27 +91,24 @@ start_intensity = intensity
 
 # Build network.
 network = DiehlAndCook2015(
-    n_inpt=784,
+    n_inpt=3*224*224,
     n_neurons=n_neurons,
     exc=exc,
     inh=inh,
     dt=dt,
     norm=78.4,
     theta_plus=theta_plus,
-    inpt_shape=(1, 28, 28),
+    inpt_shape=(3, 224, 224),
 )
 
 # Directs network to GPU
 if gpu:
     network.to("cuda")
 
-# Load MNIST data.
-train_dataset = MNIST(
+# Load FakeData data.
+train_dataset = FakeData(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
-    download=True,
-    train=True,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     ),
@@ -176,7 +173,7 @@ for epoch in range(n_epochs):
         if step > n_train:
             break
         # Get next input sample.
-        inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 1, 28, 28)}
+        inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 3, 224, 224)}
         if gpu:
             inputs = {k: v.cuda() for k, v in inputs.items()}
 
@@ -249,11 +246,11 @@ for epoch in range(n_epochs):
 
         # Optionally plot various simulation information.
         if plot:
-            image = batch["image"].view(28, 28)
-            inpt = inputs["X"].view(time, 784).sum(0).view(28, 28)
+            image = batch["image"].view(224, 224)
+            inpt = inputs["X"].view(time, 784).sum(0).view(224, 224)
             input_exc_weights = network.connections[("X", "Ae")].w
             square_weights = get_square_weights(
-                input_exc_weights.view(784, n_neurons), n_sqrt, 28
+                input_exc_weights.view(784, n_neurons), n_sqrt, 224
             )
             square_assignments = get_square_assignments(assignments, n_sqrt)
             spikes_ = {layer: spikes[layer].get("s") for layer in spikes}
@@ -277,13 +274,10 @@ print("Progress: %d / %d (%.4f seconds)" % (epoch + 1, n_epochs, t() - start))
 print("Training complete.\n")
 
 
-# Load MNIST data.
-test_dataset = MNIST(
+# Load FakeData data.
+test_dataset = FakeData(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
-    download=True,
-    train=False,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     ),
@@ -305,7 +299,7 @@ for step, batch in enumerate(test_dataset):
     if step > n_test:
         break
     # Get next input sample.
-    inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 1, 28, 28)}
+    inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 3, 224, 224)}
     if gpu:
         inputs = {k: v.cuda() for k, v in inputs.items()}
 

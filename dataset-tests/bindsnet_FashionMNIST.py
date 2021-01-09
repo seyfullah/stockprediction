@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from time import time as t
 
-from bindsnet.datasets import MNIST
+from bindsnet.datasets import FashionMNIST
 from bindsnet.encoding import PoissonEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
@@ -105,11 +105,11 @@ network = DiehlAndCook2015(
 if gpu:
     network.to("cuda")
 
-# Load MNIST data.
-train_dataset = MNIST(
+# Load FashionMNIST data.
+train_dataset = FashionMNIST(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
+    root=os.path.join("..", "..", "data", "FashionMNIST"),
     download=True,
     train=True,
     transform=transforms.Compose(
@@ -277,11 +277,11 @@ print("Progress: %d / %d (%.4f seconds)" % (epoch + 1, n_epochs, t() - start))
 print("Training complete.\n")
 
 
-# Load MNIST data.
-test_dataset = MNIST(
+# Load FashionMNIST data.
+test_dataset = FashionMNIST(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "MNIST"),
+    root=os.path.join("..", "..", "data", "FashionMNIST"),
     download=True,
     train=False,
     transform=transforms.Compose(
