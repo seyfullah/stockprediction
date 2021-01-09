@@ -2,8 +2,11 @@ from __future__ import print_function, division
 import torch
 import pandas as pd
 from torch.utils.data import Dataset
-import math
 import matplotlib.pyplot as plt
+
+from typing import Optional, Dict
+
+from bindsnet.encoding import Encoder, NullEncoder
 
 # Ignore warnings
 import warnings
@@ -11,86 +14,115 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-class StockDataset(Dataset):
-    """Stock self.df."""
+class StockDatasetBindsnet(Dataset):
+    __doc__ = (
+        """BindsNET stock price dataset wrapper:
+    
+        The stock of __getitem__ is a dictionary containing the price, 
+        label (increasing, decreasing, not changing),
+        and their encoded versions if encoders were provided.
+        \n\n"""
+    )
 
-    def __init__(self, csv_file, transform=None):
+    def __init__(self,
+                 csv_file,
+                 price_encoder: Optional[Encoder] = None,
+                 label_encoder: Optional[Encoder] = None,
+                 transform=None):
         """
         Args:
             csv_file (string): Path to the csv file with annotations.
         """
+        # language=rst
+        """
+        Constructor for the BindsNET dataset wrapper.
+        For details on the dataset you're interested in visit
+
+        :param csv_file (string):  Path to the csv file with annotations.
+        :param price_encoder: Spike encoder for use on the price
+        :param label_encoder: Spike encoder for use on the label
+        :param transform: transform
+        """
         self.df = pd.read_csv(csv_file)
+        self.transform = transform
         self.get_technical_indicators()
+        # Allow the passthrough of None, but change to NullEncoder
+        if price_encoder is None:
+            price_encoder = NullEncoder()
+
+        if label_encoder is None:
+            label_encoder = NullEncoder()
+
+        self.price_encoder = price_encoder
+        self.label_encoder = label_encoder
 
     def __len__(self):
         return len(self.df)
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx) -> Dict[str, torch.Tensor]:
         if torch.is_tensor(idx):
             idx = idx.tolist()
+        item = self.df.iloc[idx]
 
-        date = self.df.iloc[idx, 0]
-        open = self.df.iloc[idx, 1]
-        high = self.df.iloc[idx, 2]
-        low = self.df.iloc[idx, 3]
-        close = self.df.iloc[idx, 4]
-        volume = self.df.iloc[idx, 5]
-        Name = self.df.iloc[idx, 6]
-        last7DaysMean = self.df.iloc[idx - 7:idx, 4].mean()
-        if math.isnan(last7DaysMean):
-            last7DaysMean = 0.0
-        last7WeeksMean = self.df.iloc[idx - 7 * 7:idx, 4].mean()
-        if math.isnan(last7WeeksMean):
-            last7WeeksMean = 0.0
-        stock = {'date': date,
-                 'open': open,
-                 'high': high,
-                 'low': low,
-                 'close': close,
-                 'volume': volume,
-                 'Name': Name,
-                 'last7DaysMean': last7DaysMean,
-                 'last7WeeksMean': last7WeeksMean}
-        if self.transform:
-            stock = self.transform(stock)
+        close = item['close']
+        ma7 = item['ma7']
+        ma21 = item['ma21']
+        # MACD = item['MACD']
+        upper_band = item['upper_band']
+        lower_band = item['lower_band']
+        ema = item['ema']
+        # price = {'close': close,
+        #          'ma7': ma7,
+        #          'ma21': ma21,
+        #          'MACD': MACD,
+        #          '20sd': m20sd,
+        #          'upper_band': upper_band,
+        #          'lower_band': lower_band,
+        #          'ema': ema,
+        #          }
+        # price = torch.FloatTensor([close, ma7, ma21, MACD, m20sd, upper_band, lower_band, ema])
+        price = torch.FloatTensor([close, ma7, ma21, ema])
+        label = torch.FloatTensor([0])
+        if idx > 0:  # Not changing
+            if close > self.df.iloc[idx - 1]['close']:
+                label = torch.FloatTensor([1])  # Increasing
+            elif close < self.df.iloc[idx - 1]['close']:
+                label = torch.FloatTensor([2])  # Decreasing
+        output = {
+            "price": price,
+            "label": label,
+            "encoded_price": self.price_encoder(price),
+            "encoded_label": self.label_encoder(label),
+        }
 
-        return stock
+        return output
 
     def get_technical_indicators(self):
         # Create 7 and 21 days Moving Average
         self.df['ma7'] = self.df['close'].rolling(window=7).mean()
         self.df['ma21'] = self.df['close'].rolling(window=21).mean()
-        self.df['ma7'] = self.df['ma7'].fillna(0)#.fillna(method='ffill')
-        self.df['ma21'] = self.df['ma21'].fillna(0)#.fillna(method='ffill')
+        self.df['ma7'] = self.df['ma7'].fillna(0)  # .fillna(method='ffill')
+        self.df['ma21'] = self.df['ma21'].fillna(0)  # .fillna(method='ffill')
 
         s = pd.Series(self.df['close'])
 
         # Create MACD
-        # self.df['26ema'] = pd.Series.ewm(self.df['close'], span=26)
-        # self.df['12ema'] = pd.Series.ewm(self.df['close'], span=12)
-        # self.df['MACD'] = (self.df['12ema'] - self.df['26ema'])
-        # EMA_12 = pd.Series(self.df['close'].ewm(span=12, min_periods=12).mean())
-        # EMA_26 = pd.Series(self.df['close'].ewm(span=26, min_periods=26).mean())
-        # self.df['MACD'] = pd.Series(EMA_12 - EMA_26)
         exp1 = self.df['close'].ewm(span=12, adjust=False).mean()
         exp2 = self.df['close'].ewm(span=26, adjust=False).mean()
         macd = exp1 - exp2
-        self.df['MACD'] = macd.fillna(0)#
-        # exp3 = macd.ewm(span=9, adjust=False).mean()
+        self.df['MACD'] = macd.fillna(0)  #
 
         # Create Bollinger Bands
-        self.df['20sd'] = s.rolling(20).std().fillna(0)#
+        self.df['20sd'] = s.rolling(20).std().fillna(0)  #
         self.df['upper_band'] = self.df['ma21'] + (self.df['20sd'] * 2)
         self.df['lower_band'] = self.df['ma21'] - (self.df['20sd'] * 2)
         self.df['upper_band'] = self.df['upper_band'].fillna(0)
         self.df['lower_band'] = self.df['lower_band'].fillna(0)
 
         # Create Exponential moving average
-        # self.df['ema'] = self.df['close'].ewm(com=0.5).mean()
         self.df['ema'] = self.df['close'].ewm(span=20, adjust=False).mean().fillna(0)
 
         # Create Momentum
-        # self.df['momentum'] = self.df['close'] - 1
 
         return self.df
 
@@ -133,9 +165,6 @@ class StockDataset(Dataset):
         # Plot second subplot
         plt.subplot(2, 1, 2)
         plt.plot(self.df['MACD'], label='MACD', linestyle='-.')
-        # plt.plot(self.df['momentum'], label='Momentum', color='b', linestyle='-')
-        # plt.hlines(15, xmacd_, shape_0, colors='g', linestyles='--')
-        # plt.hlines(-15, xmacd_, shape_0, colors='g', linestyles='--')
         plt.title('MACD')
         plt.legend()
 
