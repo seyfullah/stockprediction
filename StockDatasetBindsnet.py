@@ -1,4 +1,6 @@
 from __future__ import print_function, division
+import math
+import numpy as np
 import torch
 import pandas as pd
 from torch.utils.data import Dataset
@@ -7,6 +9,7 @@ import matplotlib.pyplot as plt
 from typing import Optional, Dict
 
 from bindsnet.encoding import Encoder, NullEncoder
+from sklearn.preprocessing import MinMaxScaler
 
 # Ignore warnings
 import warnings
@@ -28,6 +31,7 @@ class StockDatasetBindsnet(Dataset):
                  csv_file,
                  price_encoder: Optional[Encoder] = None,
                  label_encoder: Optional[Encoder] = None,
+                 train=False,
                  transform=None):
         """
         Args:
@@ -41,11 +45,64 @@ class StockDatasetBindsnet(Dataset):
         :param csv_file (string):  Path to the csv file with annotations.
         :param price_encoder: Spike encoder for use on the price
         :param label_encoder: Spike encoder for use on the label
+        :param train: train
         :param transform: transform
         """
         self.df = pd.read_csv(csv_file)
+        self.train = train
         self.transform = transform
         self.get_technical_indicators()
+
+        # Creating a new dataframe with only the 'Close' column
+        data = self.df.filter(['close'])
+        # Converting the dataframe to a numpy array
+        dataset = data.values
+
+        # Get /Compute the number of rows to train the model on
+        training_data_len = math.ceil(len(dataset) * .8)
+        # here we are Scaling the all of the data to be values between 0 and 1 
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        scaled_data = scaler.fit_transform(dataset)
+
+        # Creating the scaled training data set
+        train_data = scaled_data[0:training_data_len, :]
+        # Spliting the data into x_train and y_train data sets
+        x_train = []
+        y_train = []
+        self.window_size = 60
+        for i in range(self.window_size, len(train_data)):
+            x_train.append(train_data[i - self.window_size:i, 0])
+            y_train.append(train_data[i, 0])
+
+        # Here we are Converting x_train and y_train to numpy arrays
+        self.x_train, self.y_train = np.array(x_train), np.array(y_train)
+
+        # Creating the scaled training data set
+        train_data = scaled_data[0:training_data_len, :]
+        # Spliting the data into x_train and y_train data sets
+        x_train = []
+        y_train = []
+        self.window_size = 60
+        for i in range(self.window_size, len(train_data)):
+            x_train.append(train_data[i - self.window_size:i, 0])
+            y_train.append(train_data[i, 0])
+
+        # Here we are Converting x_train and y_train to numpy arrays
+        self.x_train, self.y_train = np.array(x_train), np.array(y_train)
+
+        # here we are testing data set
+        test_data = scaled_data[training_data_len - self.window_size:, :]
+        # Creating the x_test and y_test data sets
+        x_test = []
+        y_test = dataset[training_data_len:, :]
+        # Get all of the rows from index 1603 to the rest and all of the columns (in this case it's only column 'Close'), so 2003 - 1603 = 400 rows of data
+        for i in range(60, len(test_data)):
+            x_test.append(test_data[i - self.window_size:i, 0])
+
+        # here we are converting x_test to a numpy array
+        self.x_test = np.array(x_test)
+        self.y_test = np.array(y_test)
+
         # Allow the passthrough of None, but change to NullEncoder
         if price_encoder is None:
             price_encoder = NullEncoder()
@@ -57,7 +114,10 @@ class StockDatasetBindsnet(Dataset):
         self.label_encoder = label_encoder
 
     def __len__(self):
-        return len(self.df)
+        # return len(self.df) - self.window_size
+        if self.train:
+            return len(self.x_train) - self.window_size
+        return len(self.x_test) - self.window_size
 
     def __getitem__(self, idx) -> Dict[str, torch.Tensor]:
         if torch.is_tensor(idx):
@@ -81,28 +141,46 @@ class StockDatasetBindsnet(Dataset):
         #          'ema': ema,
         #          }
         # price = torch.FloatTensor([close, ma7, ma21, MACD, m20sd, upper_band, lower_band, ema])
-        price = torch.FloatTensor([close, ma7, ma21, ema])
-        label = torch.FloatTensor([0])
-        if idx > 0:  # Not changing
-            if close > self.df.iloc[idx - 1]['close']:
-                label = torch.FloatTensor([1])  # Increasing
-            elif close < self.df.iloc[idx - 1]['close']:
-                label = torch.FloatTensor([2])  # Decreasing
-        output = {
-            "price": price,
-            "label": label,
-            "encoded_price": self.price_encoder(price),
-            "encoded_label": self.label_encoder(label),
-        }
-
+        # price = torch.FloatTensor([close, ma7, ma21, ema])
+        # price = torch.FloatTensor([close])
+        # label = torch.FloatTensor([0])
+        # if idx > 0:  # Not changing
+        #     if close > self.df.iloc[idx - 1]['close']:
+        #         label = torch.FloatTensor([1])  # Increasing
+        #     elif close < self.df.iloc[idx - 1]['close']:
+        #         label = torch.FloatTensor([2])  # Decreasing
+        # output = {
+        #     "price": price,
+        #     "label": label,
+        #     "encoded_price": self.price_encoder(price),
+        #     "encoded_label": self.label_encoder(label),
+        # }
+        if self.train:
+            x = torch.FloatTensor(self.x_train[idx])
+            y = torch.as_tensor(self.y_train[idx], dtype=torch.float)
+            output = {
+                "price": x,
+                "label": y,
+                "encoded_price": self.price_encoder(x),
+                "encoded_label": self.label_encoder(y),
+            }
+        else:
+            x = torch.FloatTensor(self.x_test[idx])
+            y = torch.as_tensor(self.y_test[idx], dtype=torch.float)
+            output = {
+                "price": x,
+                "label": y,
+                "encoded_price": self.price_encoder(x),
+                "encoded_label": self.label_encoder(y),
+            }
         return output
 
     def get_technical_indicators(self):
         # Create 7 and 21 days Moving Average
-        self.df['ma7'] = self.df['close'].rolling(window=7).mean()
-        self.df['ma21'] = self.df['close'].rolling(window=21).mean()
-        self.df['ma7'] = self.df['ma7'].fillna(0)  # .fillna(method='ffill')
-        self.df['ma21'] = self.df['ma21'].fillna(0)  # .fillna(method='ffill')
+        self.df['ma7'] = self.df['close'].rolling(window=7).mean().fillna(0)
+        self.df['ma21'] = self.df['close'].rolling(window=21).mean().fillna(0)
+        self.df['ma50'] = self.df['close'].rolling(window=50).mean().fillna(0)
+        self.df['Daily Return'] = self.df['close'].pct_change()
 
         s = pd.Series(self.df['close'])
 

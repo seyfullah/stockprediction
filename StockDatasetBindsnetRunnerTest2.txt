@@ -1,0 +1,36 @@
+source /home/seyfullah/anaconda3/bin/activate
+ /usr/bin/env /home/seyfullah/anaconda3/envs/py36/bin/python /home/seyfullah/.vscode/extensions/ms-python.python-2020.12.424452561/pythonFiles/lib/python/debugpy/launcher 35655 -- /home/seyfullah/github-projects/stockprediction/StockDatasetBindsnetRunner.py 
+conda activate py36
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$ source /home/seyfullah/anaconda3/bin/activate
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$  /usr/bin/env /home/seyfullah/anaconda3/envs/py36/bin/python /home/seyfullah/.vscode/extensions/ms-python.python-2020.12.424452561/pythonFiles/lib/python/debugpy/launcher 35655 -- /home/seyfullah/github-projects/stockprediction/StockDatasetBindsnetRunner.py 
+Running on Device =  cpu
+         close
+
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+  0%|▎                                                                                                                                 | 3/1199 [00:02<18:41,  1.07it/s]
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$ conda activate py36
+ cd /home/seyfullah/github-projects/stockprediction ; /usr/bin/env /home/seyfullah/anaconda3/envs/py36/bin/python /home/seyfullah/.vscode/extensions/ms-python.python-2020.12.424452561/pythonFiles/lib/(py36) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$  cd /home/seyfullah/github-projects/stockprediction ; /usr/bin/env /home/seyfullah/anaconda3/envs/py36/bin/python /home/seyfullah/.vscode/extensions/ms-python.python-2020.12.424452561/pythonFiles/lib/python/debugpy/launcher 39975 -- /home/seyfullah/github-projects/stockprediction/StockDatasetBindsnetRunner.py 
+Running on Device =  cpu
+
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [04:35<00:00,  3.22it/s]
+Progress: 1 / 1 (275.4301 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress:   9%|██████████▌                                                                                                     | 948/10000 [02:07<20:20,  7.42it/s]
+All activity accuracy: 0.09
+Proportion weighting accuracy: 0.09 
+
+Progress: 1 / 1 (127.2878 seconds)
+Testing complete.
+
+Test progress:   9%|██████████▌                                                                                                     | 948/10000 [02:07<20:20,  7.41it/s]

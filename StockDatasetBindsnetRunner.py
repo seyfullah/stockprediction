@@ -90,14 +90,14 @@ start_intensity = intensity
 
 # Build network.
 network = DiehlAndCook2015(
-    n_inpt=4,
+    n_inpt=60,
     n_neurons=n_neurons,
     exc=exc,
     inh=inh,
     dt=dt,
     norm=78.4,
     theta_plus=theta_plus,
-    inpt_shape=(1, 1, 4),
+    inpt_shape=(1, 1, 60),
 )
 
 # Directs network to GPU
@@ -109,7 +109,8 @@ train_dataset = StockDatasetBindsnet(
     csv_file='AAPL_data.csv',
     price_encoder=PoissonEncoder(time=time, dt=dt),
     label_encoder=PoissonEncoder(time=time, dt=dt),
-    transform=None
+    train=True,
+    transform=None,
     # transform=transforms.Compose(
     #     [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     # ),
@@ -174,7 +175,7 @@ for epoch in range(n_epochs):
         if step > n_train:
             break
         # Get next input sample.
-        inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 4)}
+        inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 60)}
         if gpu:
             inputs = {k: v.cuda() for k, v in inputs.items()}
 
@@ -247,11 +248,11 @@ for epoch in range(n_epochs):
 
         # Optionally plot various simulation information.
         if plot:
-            image = batch["price"].view(1, 4)
-            inpt = inputs["X"].view(time, 4).sum(0).view(1, 4)
+            image = batch["price"].view(1, 60)
+            inpt = inputs["X"].view(time, 60).sum(0).view(1, 60)
             input_exc_weights = network.connections[("X", "Ae")].w
             square_weights = get_square_weights(
-                input_exc_weights.view(1, n_neurons), n_sqrt, 4
+                input_exc_weights.view(1, n_neurons), n_sqrt, 60
             )
             square_assignments = get_square_assignments(assignments, n_sqrt)
             spikes_ = {layer: spikes[layer].get("s") for layer in spikes}
@@ -279,7 +280,8 @@ test_dataset = StockDatasetBindsnet(
     csv_file='AAPL_data.csv',
     price_encoder=PoissonEncoder(time=time, dt=dt),
     label_encoder=PoissonEncoder(time=time, dt=dt),
-    transform=None
+    train=False,
+    transform=None,
     # transform=transforms.Compose(
     #     [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     # ),
@@ -301,7 +303,7 @@ for step, batch in enumerate(test_dataset):
     if step > n_test:
         break
     # Get next input sample.
-    inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 4)}
+    inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 60)}
     if gpu:
         inputs = {k: v.cuda() for k, v in inputs.items()}
 
