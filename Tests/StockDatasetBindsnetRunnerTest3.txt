@@ -1,0 +1,51 @@
+python StockDatasetBindsnetRunner.py 
+Namespace(dt=1.0, exc=22.5, gpu=True, inh=120, intensity=128, n_epochs=1, n_neurons=50, n_test=10000, n_train=60000, n_workers=-1, plot=False, progress_interval=10, seed=0, theta_plus=0.05, time=250, train=False, update_interval=250)
+Running on Device =  cuda
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [04:17<00:00,  3.44it/s]
+Progress: 1 / 1 (257.9552 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress:   3%|██▊                                                                                                             | 251/10000 [00:48<31:16,  5.19it/s]
+All activity accuracy: 0.00
+Proportion weighting accuracy: 0.00 
+
+Progress: 1 / 1 (48.0082 seconds)
+Testing complete.
+
+Test progress:   3%|██▊                                                      
+
+
+
+
+
+
+
+python StockDatasetBindsnetRunner.py 
+Namespace(dt=1.0, exc=22.5, gpu=True, inh=120, intensity=128, n_epochs=1, n_neurons=100, n_test=10000, n_train=60000, n_workers=-1, plot=False, progress_interval=10, seed=0, theta_plus=0.05, time=250, train=False, update_interval=250)
+Running on Device =  cuda
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+ 71%|████████████████████████████████████████████████████████████████████████████████████████████                                     | 634/888 [02:53<01:10,  3.59it/s]100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 888/888 [04:16<00:00,  3.46it/s]
+Progress: 1 / 1 (256.3148 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress:   3%|██▊                                                                                                             | 251/10000 [01:09<47:48,  3.40it/s]
+All activity accuracy: 0.00
+Proportion weighting accuracy: 0.00 
+
+Progress: 1 / 1 (69.3192 seconds)
+Testing complete.
+
+Test progress:   3%|██▊                                                               

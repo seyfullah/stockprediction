@@ -1,0 +1,25 @@
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$ Bernoulli
+Bernoulli: command not found
+
+python StockDatasetBindsnetRunner.py 
+Namespace(dt=1.0, exc=22.5, gpu=True, inh=120, intensity=128, n_epochs=1, n_neurons=100, n_test=10000, n_train=60000, n_workers=-1, plot=True, progress_interval=10, seed=0, theta_plus=0.05, time=250, train=False, update_interval=250)
+Running on Device =  cpu
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 880/880 [07:40<00:00,  1.91it/s]
+Progress: 1 / 1 (460.7336 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress:   3%|███▋                                                                                                                                               | 251/10000 [00:26<17:27,  9.31it/s]
+All activity accuracy: 0.00
+Proportion weighting accuracy: 0.00 
+
+Progress: 1 / 1 (26.7122 seconds)
+Testing complete.
+
+Test progress:   3%|███▋                                                                                                                                               | 251/10000 [00:26<17:21,  9.36it/s]

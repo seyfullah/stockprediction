@@ -9,7 +9,7 @@ from tqdm import tqdm
 
 from time import time as t
 
-from bindsnet.datasets import CIFAR10
+from StockDatasetBindsnetCategorical import StockDatasetBindsnetCategorical
 from bindsnet.encoding import PoissonEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
@@ -23,7 +23,6 @@ from bindsnet.analysis.plotting import (
     plot_performance,
     plot_voltages,
 )
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--seed", type=int, default=0)
@@ -44,7 +43,7 @@ parser.add_argument("--train", dest="train", action="store_true")
 parser.add_argument("--test", dest="train", action="store_false")
 parser.add_argument("--plot", dest="plot", action="store_true")
 parser.add_argument("--gpu", dest="gpu", action="store_true")
-parser.set_defaults(plot=False, gpu=True)
+parser.set_defaults(plot=True, gpu=True)
 
 args = parser.parse_args()
 
@@ -93,26 +92,25 @@ start_intensity = intensity
 
 # Build network.
 network = DiehlAndCook2015(
-    n_inpt=3*32*32,
+    n_inpt=64,
     n_neurons=n_neurons,
     exc=exc,
     inh=inh,
     dt=dt,
     norm=78.4,
     theta_plus=theta_plus,
-    inpt_shape=(3, 32, 32),
+    inpt_shape=(1, 8, 8),
 )
 
 # Directs network to GPU
 if gpu:
     network.to("cuda")
 
-# Load CIFAR10 data.
-train_dataset = CIFAR10(
-    PoissonEncoder(time=time, dt=dt),
-    None,
-    root=os.path.join("..", "..", "data", "CIFAR10"),
-    download=True,
+# Load StockDatasetBindsnetCategorical data.
+train_dataset = StockDatasetBindsnetCategorical(
+    csv_file='AAPL_data.csv',
+    price_encoder=PoissonEncoder(time=time, dt=dt),
+    label_encoder=PoissonEncoder(time=time, dt=dt),
     train=True,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
@@ -178,7 +176,7 @@ for epoch in range(n_epochs):
         if step > n_train:
             break
         # Get next input sample.
-        inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 3, 32, 32)}
+        inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 8, 8)}
         if gpu:
             inputs = {k: v.cuda() for k, v in inputs.items()}
 
@@ -251,11 +249,11 @@ for epoch in range(n_epochs):
 
         # Optionally plot various simulation information.
         if plot:
-            image = batch["image"].view(32, 32)
-            inpt = inputs["X"].view(time, 1024).sum(0).view(32, 32)
+            image = batch["price"].view(8, 8)
+            inpt = inputs["X"].view(time, 64).sum(0).view(8, 8)
             input_exc_weights = network.connections[("X", "Ae")].w
             square_weights = get_square_weights(
-                input_exc_weights.view(1024, n_neurons), n_sqrt, 32
+                input_exc_weights.view(64, n_neurons), n_sqrt, 8
             )
             square_assignments = get_square_assignments(assignments, n_sqrt)
             spikes_ = {layer: spikes[layer].get("s") for layer in spikes}
@@ -278,13 +276,11 @@ for epoch in range(n_epochs):
 print("Progress: %d / %d (%.4f seconds)" % (epoch + 1, n_epochs, t() - start))
 print("Training complete.\n")
 
-
-# Load CIFAR10 data.
-test_dataset = CIFAR10(
-    PoissonEncoder(time=time, dt=dt),
-    None,
-    root=os.path.join("..", "..", "data", "CIFAR10"),
-    download=True,
+# Load StockDatasetBindsnetCategorical data.
+test_dataset = StockDatasetBindsnetCategorical(
+    csv_file='AAPL_data.csv',
+    price_encoder=PoissonEncoder(time=time, dt=dt),
+    label_encoder=PoissonEncoder(time=time, dt=dt),
     train=False,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
@@ -307,7 +303,7 @@ for step, batch in enumerate(test_dataset):
     if step > n_test:
         break
     # Get next input sample.
-    inputs = {"X": batch["encoded_image"].view(int(time / dt), 1, 3, 32, 32)}
+    inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 8, 8)}
     if gpu:
         inputs = {k: v.cuda() for k, v in inputs.items()}
 
@@ -343,7 +339,6 @@ for step, batch in enumerate(test_dataset):
 
 print("\nAll activity accuracy: %.2f" % (accuracy["all"] / n_test))
 print("Proportion weighting accuracy: %.2f \n" % (accuracy["proportion"] / n_test))
-
 
 print("Progress: %d / %d (%.4f seconds)" % (epoch + 1, n_epochs, t() - start))
 print("Testing complete.\n")

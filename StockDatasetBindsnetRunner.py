@@ -10,7 +10,7 @@ from tqdm import tqdm
 from time import time as t
 
 from StockDatasetBindsnet import StockDatasetBindsnet
-from bindsnet.encoding import PoissonEncoder
+from bindsnet.encoding import BernoulliEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
 from bindsnet.utils import get_square_weights, get_square_assignments
@@ -43,7 +43,7 @@ parser.add_argument("--train", dest="train", action="store_true")
 parser.add_argument("--test", dest="train", action="store_false")
 parser.add_argument("--plot", dest="plot", action="store_true")
 parser.add_argument("--gpu", dest="gpu", action="store_true")
-parser.set_defaults(plot=False, gpu=True)
+parser.set_defaults(plot=True, gpu=True)
 
 args = parser.parse_args()
 
@@ -64,6 +64,8 @@ update_interval = args.update_interval
 train = args.train
 plot = args.plot
 gpu = args.gpu
+
+print(args)
 
 # Sets up Gpu use
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -90,14 +92,14 @@ start_intensity = intensity
 
 # Build network.
 network = DiehlAndCook2015(
-    n_inpt=60,
+    n_inpt=64,
     n_neurons=n_neurons,
     exc=exc,
     inh=inh,
     dt=dt,
     norm=78.4,
     theta_plus=theta_plus,
-    inpt_shape=(1, 1, 60),
+    inpt_shape=(1, 8, 8),
 )
 
 # Directs network to GPU
@@ -107,13 +109,12 @@ if gpu:
 # Load StockDatasetBindsnet data.
 train_dataset = StockDatasetBindsnet(
     csv_file='AAPL_data.csv',
-    price_encoder=PoissonEncoder(time=time, dt=dt),
-    label_encoder=PoissonEncoder(time=time, dt=dt),
+    price_encoder=BernoulliEncoder(time=time, dt=dt),
+    label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=True,
-    transform=None,
-    # transform=transforms.Compose(
-    #     [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
-    # ),
+    transform=transforms.Compose(
+        [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
+    ),
 )
 
 # Record spikes during the simulation.
@@ -175,7 +176,7 @@ for epoch in range(n_epochs):
         if step > n_train:
             break
         # Get next input sample.
-        inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 60)}
+        inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 8, 8)}
         if gpu:
             inputs = {k: v.cuda() for k, v in inputs.items()}
 
@@ -248,11 +249,11 @@ for epoch in range(n_epochs):
 
         # Optionally plot various simulation information.
         if plot:
-            image = batch["price"].view(1, 60)
-            inpt = inputs["X"].view(time, 60).sum(0).view(1, 60)
+            image = batch["price"].view(8, 8)
+            inpt = inputs["X"].view(time, 64).sum(0).view(8, 8)
             input_exc_weights = network.connections[("X", "Ae")].w
             square_weights = get_square_weights(
-                input_exc_weights.view(1, n_neurons), n_sqrt, 60
+                input_exc_weights.view(64, n_neurons), n_sqrt, 8
             )
             square_assignments = get_square_assignments(assignments, n_sqrt)
             spikes_ = {layer: spikes[layer].get("s") for layer in spikes}
@@ -278,13 +279,12 @@ print("Training complete.\n")
 # Load StockDatasetBindsnet data.
 test_dataset = StockDatasetBindsnet(
     csv_file='AAPL_data.csv',
-    price_encoder=PoissonEncoder(time=time, dt=dt),
-    label_encoder=PoissonEncoder(time=time, dt=dt),
+    price_encoder=BernoulliEncoder(time=time, dt=dt),
+    label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=False,
-    transform=None,
-    # transform=transforms.Compose(
-    #     [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
-    # ),
+    transform=transforms.Compose(
+        [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
+    ),
 )
 
 # Sequence of accuracy estimates.
@@ -303,7 +303,7 @@ for step, batch in enumerate(test_dataset):
     if step > n_test:
         break
     # Get next input sample.
-    inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 1, 60)}
+    inputs = {"X": batch["encoded_price"].view(int(time / dt), 1, 1, 8, 8)}
     if gpu:
         inputs = {k: v.cuda() for k, v in inputs.items()}
 

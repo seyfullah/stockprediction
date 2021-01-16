@@ -17,7 +17,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-class StockDatasetBindsnet(Dataset):
+class StockDatasetBindsnetCategorical(Dataset):
     __doc__ = (
         """BindsNET stock price dataset wrapper:
     
@@ -72,7 +72,12 @@ class StockDatasetBindsnet(Dataset):
         self.window_size = 64
         for i in range(self.window_size, len(train_data)):
             x_train.append(train_data[i - self.window_size:i, 0])
-            y_train.append(train_data[i, 0])
+            if train_data[i, 0] > train_data[i-1, 0]:
+                y_train.append(1)
+            elif train_data[i, 0] == train_data[i-1, 0]:
+                y_train.append(0)
+            else:
+                y_train.append(-1)
 
         # Here we are Converting x_train and y_train to numpy arrays
         self.x_train, self.y_train = np.array(x_train), np.array(y_train)
@@ -124,37 +129,6 @@ class StockDatasetBindsnet(Dataset):
             idx = idx.tolist()
         item = self.df.iloc[idx]
 
-        close = item['close']
-        ma7 = item['ma7']
-        ma21 = item['ma21']
-        # MACD = item['MACD']
-        upper_band = item['upper_band']
-        lower_band = item['lower_band']
-        ema = item['ema']
-        # price = {'close': close,
-        #          'ma7': ma7,
-        #          'ma21': ma21,
-        #          'MACD': MACD,
-        #          '20sd': m20sd,
-        #          'upper_band': upper_band,
-        #          'lower_band': lower_band,
-        #          'ema': ema,
-        #          }
-        # price = torch.FloatTensor([close, ma7, ma21, MACD, m20sd, upper_band, lower_band, ema])
-        # price = torch.FloatTensor([close, ma7, ma21, ema])
-        # price = torch.FloatTensor([close])
-        # label = torch.FloatTensor([0])
-        # if idx > 0:  # Not changing
-        #     if close > self.df.iloc[idx - 1]['close']:
-        #         label = torch.FloatTensor([1])  # Increasing
-        #     elif close < self.df.iloc[idx - 1]['close']:
-        #         label = torch.FloatTensor([2])  # Decreasing
-        # output = {
-        #     "price": price,
-        #     "label": label,
-        #     "encoded_price": self.price_encoder(price),
-        #     "encoded_label": self.label_encoder(label),
-        # }
         if self.train:
             x = torch.FloatTensor(self.x_train[idx])
             y = torch.as_tensor(self.y_train[idx], dtype=torch.float)
