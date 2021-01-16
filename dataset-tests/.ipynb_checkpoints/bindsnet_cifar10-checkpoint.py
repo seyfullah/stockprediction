@@ -251,8 +251,8 @@ for epoch in range(n_epochs):
 
         # Optionally plot various simulation information.
         if plot:
-            image = batch["image"].view(3, 32, 32)
-            inpt = inputs["X"].view(time, 1024).sum(0).view(3, 32, 32)
+            image = batch["image"].view(32, 32)
+            inpt = inputs["X"].view(time, 1024).sum(0).view(32, 32)
             input_exc_weights = network.connections[("X", "Ae")].w
             square_weights = get_square_weights(
                 input_exc_weights.view(1024, n_neurons), n_sqrt, 32

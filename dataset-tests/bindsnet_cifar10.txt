@@ -1,0 +1,39 @@
+runfile('/home/seyfullah/github-projects/stockprediction/dataset-tests/bindsnet_cifar10.py', wdir='/home/seyfullah/github-projects/stockprediction/dataset-tests')
+Namespace(dt=1.0, exc=22.5, gpu=True, inh=120, intensity=128, n_epochs=1, n_neurons=100, n_test=10000, n_train=60000, n_workers=-1, plot=False, progress_interval=10, seed=0, theta_plus=0.05, time=250, train=False, update_interval=250)
+Running on Device =  cuda
+Files already downloaded and verified
+  0%|          | 0/50000 [00:00<?, ?it/s]
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+ 20%|██        | 10000/50000 [48:41<3:09:58,  3.51it/s]
+All activity accuracy: 10.05 (last), 10.05 (average), 10.05 (best)
+Proportion weighting accuracy: 10.05 (last), 10.05 (average), 10.05 (best)
+
+ 40%|████      | 20000/50000 [1:36:30<9:39:23,  1.16s/it] 
+All activity accuracy: 9.04 (last), 9.54 (average), 10.05 (best)
+Proportion weighting accuracy: 8.95 (last), 9.50 (average), 10.05 (best)
+
+ 60%|██████    | 30000/50000 [2:23:38<1:31:44,  3.63it/s] 
+All activity accuracy: 9.73 (last), 9.61 (average), 10.05 (best)
+Proportion weighting accuracy: 9.66 (last), 9.55 (average), 10.05 (best)
+
+ 80%|████████  | 40000/50000 [3:10:25<45:57,  3.63it/s]  
+All activity accuracy: 10.00 (last), 9.71 (average), 10.05 (best)
+Proportion weighting accuracy: 10.01 (last), 9.67 (average), 10.05 (best)
+
+100%|██████████| 50000/50000 [3:57:09<00:00,  3.51it/s]Progress: 1 / 1 (14229.4997 seconds)
+Training complete.
+
+
+Files already downloaded and verified
+  0%|          | 0/10000 [00:00<?, ?it/s]
+Begin testing
+
+Test progress: 100%|██████████| 10000/10000 [58:04<00:00,  2.97it/s]
+All activity accuracy: 0.08
+Proportion weighting accuracy: 0.08 
+
+Progress: 1 / 1 (3484.1506 seconds)
+Testing complete.
+

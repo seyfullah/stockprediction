@@ -109,9 +109,7 @@ if gpu:
 train_dataset = Cityscapes(
     PoissonEncoder(time=time, dt=dt),
     None,
-    root=os.path.join("..", "..", "data", "Cityscapes"),
-    download=True,
-    train=True,
+    root=os.path.join("..", "..", "..", "data", "Cityscapes"),
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     ),
@@ -282,8 +280,6 @@ test_dataset = Cityscapes(
     PoissonEncoder(time=time, dt=dt),
     None,
     root=os.path.join("..", "..", "data", "Cityscapes"),
-    download=True,
-    train=False,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
     ),
