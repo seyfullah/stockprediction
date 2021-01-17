@@ -1,0 +1,8 @@
+runfile('/home/seyfullah/github-projects/stockprediction/dataset-tests/bindsnet_Cityscapes.py', wdir='/home/seyfullah/github-projects/stockprediction/dataset-tests')
+Running on Device =  cuda
+  0%|          | 0/2975 [00:00<?, ?it/s]
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+
+Burada bitti

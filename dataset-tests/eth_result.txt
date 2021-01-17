@@ -1,0 +1,43 @@
+
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/bindsnet/examples/mnist$ python eth_mnist.py 
+Running on Device =  cpu
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+ 17%|██████████████████████████                                                                                                                                  | 10000/60000 [1:30:08<7:25:19,  1.87it/s]
+All activity accuracy: 9.82 (last), 9.82 (average), 9.82 (best)
+Proportion weighting accuracy: 9.82 (last), 9.82 (average), 9.82 (best)
+
+ 33%|████████████████████████████████████████████████████                                                                                                        | 20000/60000 [2:59:45<5:58:47,  1.86it/s]
+All activity accuracy: 78.00 (last), 43.91 (average), 78.00 (best)
+Proportion weighting accuracy: 78.89 (last), 44.36 (average), 78.89 (best)
+
+ 50%|██████████████████████████████████████████████████████████████████████████████                                                                              | 30000/60000 [4:29:14<4:22:46,  1.90it/s]
+All activity accuracy: 77.58 (last), 55.13 (average), 78.00 (best)
+Proportion weighting accuracy: 78.22 (last), 55.64 (average), 78.89 (best)
+
+ 67%|████████████████████████████████████████████████████████████████████████████████████████████████████████                                                    | 40000/60000 [5:58:32<2:55:07,  1.90it/s]
+All activity accuracy: 76.47 (last), 60.47 (average), 78.00 (best)
+Proportion weighting accuracy: 77.44 (last), 61.09 (average), 78.89 (best)
+
+ 83%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                          | 50000/60000 [7:27:50<1:28:32,  1.88it/s]
+All activity accuracy: 75.28 (last), 63.43 (average), 78.00 (best)
+Proportion weighting accuracy: 76.31 (last), 64.14 (average), 78.89 (best)
+
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 60000/60000 [8:58:01<00:00,  1.86it/s]
+Progress: 1 / 1 (32281.8011 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10000/10000 [19:00<00:00,  8.35it/s]
+All activity accuracy: 0.75
+Proportion weighting accuracy: 0.76 
+
+Progress: 1 / 1 (1140.5825 seconds)
+Testing complete.
+
+Test progress: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10000/10000 [19:00<00:00,  8.77it/s]
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/bindsnet/examples/mnist$ 
