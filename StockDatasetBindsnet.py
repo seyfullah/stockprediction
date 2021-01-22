@@ -31,8 +31,7 @@ class StockDatasetBindsnet(Dataset):
                  csv_file,
                  price_encoder: Optional[Encoder] = None,
                  label_encoder: Optional[Encoder] = None,
-                 train=False,
-                 transform=None):
+                 train=False):
         """
         Args:
             csv_file (string): Path to the csv file with annotations.
@@ -46,11 +45,9 @@ class StockDatasetBindsnet(Dataset):
         :param price_encoder: Spike encoder for use on the price
         :param label_encoder: Spike encoder for use on the label
         :param train: train
-        :param transform: transform
         """
         self.df = pd.read_csv(csv_file)
         self.train = train
-        self.transform = transform
         self.get_technical_indicators()
 
         # Creating a new dataframe with only the 'Close' column
@@ -69,7 +66,8 @@ class StockDatasetBindsnet(Dataset):
         # Spliting the data into x_train and y_train data sets
         x_train = []
         y_train = []
-        self.window_size = 64
+        dim = 16
+        self.window_size = dim * dim
         for i in range(self.window_size, len(train_data)):
             x_train.append(train_data[i - self.window_size:i, 0])
             y_train.append(train_data[i, 0])
@@ -82,7 +80,6 @@ class StockDatasetBindsnet(Dataset):
         # Spliting the data into x_train and y_train data sets
         x_train = []
         y_train = []
-        self.window_size = 64
         for i in range(self.window_size, len(train_data)):
             x_train.append(train_data[i - self.window_size:i, 0])
             y_train.append(train_data[i, 0])
@@ -117,7 +114,7 @@ class StockDatasetBindsnet(Dataset):
         # return len(self.df) - self.window_size
         if self.train:
             return len(self.x_train) - self.window_size
-        return len(self.x_test) - self.window_size
+        return len(self.x_test) - 1
 
     def __getitem__(self, idx) -> Dict[str, torch.Tensor]:
         if torch.is_tensor(idx):
@@ -158,20 +155,24 @@ class StockDatasetBindsnet(Dataset):
         if self.train:
             x = torch.FloatTensor(self.x_train[idx])
             y = torch.as_tensor(self.y_train[idx], dtype=torch.float)
+            x_encoded = self.price_encoder(x)
+            y_encoded = self.label_encoder(y)
             output = {
                 "price": x,
                 "label": y,
-                "encoded_price": self.price_encoder(x),
-                "encoded_label": self.label_encoder(y),
+                "encoded_price": x_encoded,
+                "encoded_label": y_encoded,
             }
         else:
             x = torch.FloatTensor(self.x_test[idx])
             y = torch.as_tensor(self.y_test[idx], dtype=torch.float)
+            x_encoded = self.price_encoder(x)
+            y_encoded = self.label_encoder(y)
             output = {
                 "price": x,
                 "label": y,
-                "encoded_price": self.price_encoder(x),
-                "encoded_label": self.label_encoder(y),
+                "encoded_price": x_encoded,
+                "encoded_label": y_encoded,
             }
         return output
 

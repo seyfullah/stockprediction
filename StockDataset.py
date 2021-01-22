@@ -29,19 +29,7 @@ class StockDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        date = self.df.iloc[idx, 0]
-        open = self.df.iloc[idx, 1]
-        high = self.df.iloc[idx, 2]
-        low = self.df.iloc[idx, 3]
         close = self.df.iloc[idx, 4]
-        volume = self.df.iloc[idx, 5]
-        Name = self.df.iloc[idx, 6]
-        last7DaysMean = self.df.iloc[idx - 7:idx, 4].mean()
-        if math.isnan(last7DaysMean):
-            last7DaysMean = 0.0
-        last7WeeksMean = self.df.iloc[idx - 7 * 7:idx, 4].mean()
-        if math.isnan(last7WeeksMean):
-            last7WeeksMean = 0.0
         stock = {'date': date,
                  'open': open,
                  'high': high,
