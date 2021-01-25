@@ -10,7 +10,7 @@ from tqdm import tqdm
 from time import time as t
 
 from StockDatasetBindsnetCategorical import StockDatasetBindsnetCategorical
-from bindsnet.encoding import PoissonEncoder
+from bindsnet.encoding import BernoulliEncoder
 from bindsnet.models import DiehlAndCook2015
 from bindsnet.network.monitors import Monitor
 from bindsnet.utils import get_square_weights, get_square_assignments
@@ -109,8 +109,8 @@ if gpu:
 # Load StockDatasetBindsnetCategorical data.
 train_dataset = StockDatasetBindsnetCategorical(
     csv_file='AAPL_data.csv',
-    price_encoder=PoissonEncoder(time=time, dt=dt),
-    label_encoder=PoissonEncoder(time=time, dt=dt),
+    price_encoder=BernoulliEncoder(time=time, dt=dt),
+    label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=True,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]
@@ -279,8 +279,8 @@ print("Training complete.\n")
 # Load StockDatasetBindsnetCategorical data.
 test_dataset = StockDatasetBindsnetCategorical(
     csv_file='AAPL_data.csv',
-    price_encoder=PoissonEncoder(time=time, dt=dt),
-    label_encoder=PoissonEncoder(time=time, dt=dt),
+    price_encoder=BernoulliEncoder(time=time, dt=dt),
+    label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=False,
     transform=transforms.Compose(
         [transforms.ToTensor(), transforms.Lambda(lambda x: x * intensity)]

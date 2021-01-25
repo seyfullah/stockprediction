@@ -1,0 +1,45 @@
+Namespace(dt=1.0, exc=22.5, gpu=True, inh=120, intensity=128, n_epochs=1, n_neurons=100, n_test=10000, n_train=60000, n_workers=-1, plot=True, progress_interval=10, seed=0, theta_plus=0.05, time=250, train=False, update_interval=250)
+Running on Device =  cuda
+         ===============
+         NETWORK SUMMARY
+         ===============
+         batch size:1
+    ··········································
+    Layer: 'X' (trainable)
+   256 neurons (1, 16, 16)
+       ·connected to 'Ae' by 256,000 synapses
+    ··········································
+    Layer: 'Ae' (trainable)
+   1,000 neurons [1000]
+       ·connected to 'Ai' by 1,000,000 synapses
+    ··········································
+    Layer: 'Ai' (trainable)
+   1,000 neurons [1000]
+       ·connected to 'Ae' by 1,000,000 synapses
+     ==========================
+Total neurons: 2,256 (2,256 trainable)
+Total synapses weights: 2,256,000 (2,256,000 trainable)
+
+Begin training.
+
+Progress: 0 / 1 (0.0000 seconds)
+ 57%|█████████████████████████████████████████████████████████████████████████████████████████████▌                                                                      | 283/496 [04:00<03:22,  1.05it/s]
+All activity accuracy: 0.00 (last), 0.00 (average), 0.00 (best)
+Proportion weighting accuracy: 0.00 (last), 0.00 (average), 0.00 (best)
+
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 496/496 [06:58<00:00,  1.18it/s]
+Progress: 1 / 1 (418.6443 seconds)
+Training complete.
+
+
+Begin testing
+
+Test progress:  89%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                | 251/283 [01:56<00:15,  2.04it/s]
+All activity accuracy: 0.00
+Proportion weighting accuracy: 0.00 
+
+Progress: 1 / 1 (116.2064 seconds)
+Testing complete.
+
+Test progress:  89%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                | 251/283 [01:56<00:14,  2.15it/s]
+(base) seyfullah@seyfullah-EXCALIBUR-G900:~/github-projects/stockprediction$ 
