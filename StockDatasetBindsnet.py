@@ -248,3 +248,29 @@ class StockDatasetBindsnet(Dataset):
         plt.legend()
 
         plt.show()
+
+        df = self.df
+        df.info()
+        print(df.head())
+        print(df.tail())
+        print(df.describe())
+
+        plt.figure(figsize=(15, 5));
+        plt.subplot(1,2,1);
+        plt.plot(df.open.values, color='red', label='open')
+        plt.plot(df.close.values, color='green', label='close')
+        plt.plot(df.low.values, color='blue', label='low')
+        plt.plot(df.high.values, color='black', label='high')
+        plt.title('stock price')
+        plt.xlabel('time [days]')
+        plt.ylabel('price')
+        plt.legend(loc='best')
+        plt.show()
+
+        plt.subplot(1,2,2);
+        plt.plot(df.volume.values, color='black', label='volume')
+        plt.title('stock volume')
+        plt.xlabel('time [days]')
+        plt.ylabel('volume')
+        plt.legend(loc='best');
+        plt.show()

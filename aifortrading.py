@@ -8,9 +8,7 @@ from utils import *
 import time
 import numpy as np
 
-from mxnet import nd, autograd, gluon
-from mxnet.gluon import nn, rnn
-import mxnet as mx
+
 import datetime
 import seaborn as sns
 import pandas as pd
@@ -24,7 +22,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 
-import xgboost as xgb
+# import xgboost as xgb
 from sklearn.metrics import accuracy_score
 import pandas_datareader as web
 
@@ -39,10 +37,6 @@ warnings.filterwarnings("ignore")
 start = time.time()
 print("start:" + str(datetime.datetime.now()))
 stock = 'AAPL'
-
-context = mx.cpu();
-model_ctx = mx.cpu()
-mx.random.seed(1719)
 
 
 def parser(x):
@@ -142,7 +136,7 @@ plot_technical_indicators(dataset_TI_df, 400)
 
 # 3.3. Fundamental analysis
 # just import bert
-import bert
+# import bert
 
 # data_FT = dataset_ex_df[['Date', 'GS']]
 data_FT = df.iloc[:, 3]
@@ -251,7 +245,15 @@ def get_feature_importance_data(data_income):
 # Get training and test data
 (X_train_FI, y_train_FI), (X_test_FI, y_test_FI) = get_feature_importance_data(dataset_TI_df)
 
-regressor = xgb.XGBRegressor(gamma=0.0, n_estimators=150, base_score=0.7, colsample_bytree=1, learning_rate=0.05)
+# from mxnet import nd, autograd, gluon
+# from mxnet.gluon import nn, rnn
+# import mxnet as mx
+
+# context = mx.cpu();
+# model_ctx = mx.cpu()
+# mx.random.seed(1719)
+
+# regressor = xgb.XGBRegressor(gamma=0.0, n_estimators=150, base_score=0.7, colsample_bytree=1, learning_rate=0.05)
 
 
 # xgbModel = regressor.fit(X_train_FI, y_train_FI,
@@ -324,49 +326,49 @@ batch_size = 64
 # test_iter = mx.io.NDArrayIter(data={'data': VAE_data[num_training_days:, :-1]}, \
 #                               label={'label': VAE_data[num_training_days:, -1]}, batch_size=batch_size)
 
-model_ctx = mx.cpu()
+# model_ctx = mx.cpu()
 
 
-class VAE(gluon.HybridBlock):
-    def __init__(self, n_hidden=400, n_latent=2, n_layers=1, n_output=784, \
-                 batch_size=100, act_type='relu', **kwargs):
-        self.soft_zero = 1e-10
-        self.n_latent = n_latent
-        self.batch_size = batch_size
-        self.output = None
-        self.mu = None
-        super(VAE, self).__init__(**kwargs)
+# class VAE(gluon.HybridBlock):
+#     def __init__(self, n_hidden=400, n_latent=2, n_layers=1, n_output=784, \
+#                  batch_size=100, act_type='relu', **kwargs):
+#         self.soft_zero = 1e-10
+#         self.n_latent = n_latent
+#         self.batch_size = batch_size
+#         self.output = None
+#         self.mu = None
+#         super(VAE, self).__init__(**kwargs)
 
-        with self.name_scope():
-            self.encoder = nn.HybridSequential(prefix='encoder')
+#         with self.name_scope():
+#             self.encoder = nn.HybridSequential(prefix='encoder')
 
-            for i in range(n_layers):
-                self.encoder.add(nn.Dense(n_hidden, activation=act_type))
-            self.encoder.add(nn.Dense(n_latent * 2, activation=None))
+#             for i in range(n_layers):
+#                 self.encoder.add(nn.Dense(n_hidden, activation=act_type))
+#             self.encoder.add(nn.Dense(n_latent * 2, activation=None))
 
-            self.decoder = nn.HybridSequential(prefix='decoder')
-            for i in range(n_layers):
-                self.decoder.add(nn.Dense(n_hidden, activation=act_type))
-            self.decoder.add(nn.Dense(n_output, activation='sigmoid'))
+#             self.decoder = nn.HybridSequential(prefix='decoder')
+#             for i in range(n_layers):
+#                 self.decoder.add(nn.Dense(n_hidden, activation=act_type))
+#             self.decoder.add(nn.Dense(n_output, activation='sigmoid'))
 
-    def hybrid_forward(self, F, x):
-        h = self.encoder(x)
-        # print(h)
-        mu_lv = F.split(h, axis=1, num_outputs=2)
-        mu = mu_lv[0]
-        lv = mu_lv[1]
-        self.mu = mu
+#     def hybrid_forward(self, F, x):
+#         h = self.encoder(x)
+#         # print(h)
+#         mu_lv = F.split(h, axis=1, num_outputs=2)
+#         mu = mu_lv[0]
+#         lv = mu_lv[1]
+#         self.mu = mu
 
-        eps = F.random_normal(loc=0, scale=1, shape=(self.batch_size, self.n_latent), ctx=model_ctx)
-        z = mu + F.exp(0.5 * lv) * eps
-        y = self.decoder(z)
-        self.output = y
+#         eps = F.random_normal(loc=0, scale=1, shape=(self.batch_size, self.n_latent), ctx=model_ctx)
+#         z = mu + F.exp(0.5 * lv) * eps
+#         y = self.decoder(z)
+#         self.output = y
 
-        KL = 0.5 * F.sum(1 + lv - mu * mu - F.exp(lv), axis=1)
-        logloss = F.sum(x * F.log(y + self.soft_zero) + (1 - x) * F.log(1 - y + self.soft_zero), axis=1)
-        loss = -logloss - KL
+#         KL = 0.5 * F.sum(1 + lv - mu * mu - F.exp(lv), axis=1)
+#         logloss = F.sum(x * F.log(y + self.soft_zero) + (1 - x) * F.log(1 - y + self.soft_zero), axis=1)
+#         loss = -logloss - KL
 
-        return loss
+#         return loss
 
 
 # n_hidden = 400  # neurons in each layer
