@@ -66,7 +66,7 @@ class StockDatasetBindsnet(Dataset):
         # Spliting the data into x_train and y_train data sets
         x_train = []
         y_train = []
-        dim = 16
+        dim = 32
         self.window_size = dim * dim
         for i in range(self.window_size, len(train_data)):
             x_train.append(train_data[i - self.window_size:i, 0])
@@ -93,7 +93,7 @@ class StockDatasetBindsnet(Dataset):
         x_test = []
         y_test = dataset[training_data_len:, :]
         # Get all of the rows from index 1603 to the rest and all of the columns (in this case it's only column 'Close'), so 2003 - 1603 = 400 rows of data
-        for i in range(64, len(test_data)):
+        for i in range(dim*dim, len(test_data)):
             x_test.append(test_data[i - self.window_size:i, 0])
 
         # here we are converting x_test to a numpy array

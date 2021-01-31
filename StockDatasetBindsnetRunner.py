@@ -75,6 +75,9 @@ gpu = args.gpu
 n_neurons = 1000
 n_test = 283
 n_train = 976
+
+n_test = 1056
+n_train = 4227
 # theta_plus = 0
 # exc = 0
 # inh = 1000
@@ -103,7 +106,7 @@ if not train:
 n_sqrt = int(np.ceil(np.sqrt(n_neurons)))
 start_intensity = intensity
 
-dim = 16
+dim = 32
 # Build network.
 network = DiehlAndCook2015(
     n_inpt=dim*dim,
@@ -123,7 +126,7 @@ if gpu:
 
 # Load StockDatasetBindsnet data.
 train_dataset = StockDatasetBindsnet(
-    csv_file='AAPL_data.csv',
+    csv_file='AAPL-2000-2021.csv',
     price_encoder=BernoulliEncoder(time=time, dt=dt),
     label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=True
@@ -290,7 +293,7 @@ print("Training complete.\n")
 
 # Load StockDatasetBindsnet data.
 test_dataset = StockDatasetBindsnet(
-    csv_file='AAPL_data.csv',
+    csv_file='AAPL-2000-2021.csv',
     price_encoder=BernoulliEncoder(time=time, dt=dt),
     label_encoder=BernoulliEncoder(time=time, dt=dt),
     train=False

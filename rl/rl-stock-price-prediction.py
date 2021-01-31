@@ -32,13 +32,20 @@ def getStockDataVec(key):
 def sigmoid(x):
     return 1 / (1 + math.exp(-x))
 
-
+#t index
+#n windows_size + 1 = 61
 def getState(data, t, n):
     d = t - n + 1
     block = data[d:t + 1] if d >= 0 else -d * [data[0]] + data[0:t + 1]  # pad with t0
+    # print("d: " + str(d) + " block: " + str(block))
     res = []
     for i in range(n - 1):
-        res.append(sigmoid(block[i + 1] - block[i]))
+        diff = block[i + 1] - block[i]
+        s = sigmoid(diff)
+        # print("%r- block[%r]: %r block[%r]: %r diff: %r sigmoid(%r): %r" % (
+        #         i, i+1, block[i+1], i, block[i], diff, diff, s))
+        res.append(s)
+    print(np.array([res]))
     return np.array([res])
 
 
@@ -63,9 +70,11 @@ for e in range(episode_count + 1):
     print(str(range(l)) + " kere dönecek.")
     for t in range(l):
         action = agent.act(state)
+        print("action: %r" % (action))
         # sit
         next_state = getState(data, t + 1, window_size + 1)
         reward = 0
+        print(str(t) + " of " + str(l))
         if action == 1:  # buy
             agent.inventory.append(data[t])
             print(str(t) + " Buy: " + formatPrice(data[t]))
@@ -76,6 +85,12 @@ for e in range(episode_count + 1):
             print(str(t) + " Sell: " + formatPrice(data[t]) + " | Profit: " + formatPrice(data[t] - bought_price))
         done = True if t == l - 1 else False
         agent.memory.append((state, action, reward, next_state, done))
+        print("state, action, reward, next_state, done")
+        print(state)
+        print(action)
+        print(reward)
+        print(next_state)
+        print(done)
         state = next_state
         if done:
             print("--------------------------------")
